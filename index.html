@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/league.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1><img src="images/Kubeflow_Logo.png" width="200" height="202"></h1>
+            The Kubeflow project is dedicated to making deployments of machine learning (ML) workflows on Kubernetes
+            simple, portable and scalable.
+            Anywhere you are running Kubernetes, you should be able to run Kubeflow.
+        </section>
+        <section>
+            <h1><img src="images/Ambassador_Logo.png" width="321" height="80"></h1>
+            Ambassador is an open source, Kubernetes-native microservices API gateway built on the Envoy Proxy.
+            Ambassador is built from the ground up to support multiple, independent teams that need to rapidly publish,
+            monitor, and update services for end users.
+            Ambassador can also be used to handle the functions of a Kubernetes ingress controller and load balancer.
+        </section>
+        <section>
+            <h1><img src="images/Seldon_Logo.jpg" width="400" height="100"></h1>
+            Seldon a serving container to export trained models to Kubernetes.
+            Kubeflow integrates with Seldon Core, the open source platform for deploying machine learning models on
+            Kubernetes.
+        </section>
+        <section>
+            <pre><code data-trim data-noescape>
+            ---
+            <mark>apiVersion: "kubeflow.org/v1alpha2"</mark>
+            <mark>kind: TFJob</mark>
+            metadata:
+            name: kube-demo-dist
+            spec:
+            tfReplicaSpecs:
+            Master:
+            replicas: 1
+            template:
+            spec:
+            containers:
+            - name: tensorflow
+            image: alvinhenrick/kube-demo-dist:1.1
+            command: ["python", "/code/train_and_eval.py","--output_path=/model/imdb_model"]
+            volumeMounts:
+            - name: data
+            mountPath: "/data"
+            - name: models
+            mountPath: "/model"
+            volumes:
+            - name: data
+            persistentVolumeClaim:
+            claimName: mydata
+            - name: models
+            persistentVolumeClaim:
+            claimName: mymodels
+            Worker:
+            replicas: 3
+            template:
+            spec:
+            containers:
+            - name: tensorflow
+            image: alvinhenrick/kube-demo-dist:1.1
+            command: ["python", "/code/train_and_eval.py","--output_path=/model/imdb_model"]
+            volumeMounts:
+            - name: data
+            mountPath: "/data"
+            - name: models
+            mountPath: "/model"
+            volumes:
+            - name: data
+            persistentVolumeClaim:
+            claimName: mydata
+            - name: models
+            persistentVolumeClaim:
+            claimName: mymodels
+            PS:
+            replicas: 2
+            template:
+            spec:
+            containers:
+            - name: tensorflow
+            image: alvinhenrick/kube-demo-dist:1.1
+            command: ["python", "/code/train_and_eval.py","--output_path=/model/imdb_model"]
+            volumeMounts:
+            - name: data
+            mountPath: "/data"
+            - name: models
+            mountPath: "/model"
+            ports:
+            - containerPort: 6006
+            volumes:
+            - name: data
+            persistentVolumeClaim:
+            claimName: mydata
+            - name: models
+            persistentVolumeClaim:
+            claimName: mymodels
+            </code></pre>
+
+        </section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
