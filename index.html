@@ -110,7 +110,8 @@
             Kubernetes.
         </section>
         <section>
-	        <pre>
+            <h4>TFJob</h4>
+            <pre>
                 <code data-trim>
                 ---
                 apiVersion: "kubeflow.org/v1alpha2"
@@ -183,17 +184,21 @@
                               claimName: mymodels
                 </code>
             </pre>
-            <p class="fragment current-only" data-code-focus="3">TFJob is a Kubernetes custom resource definition that
+            <p class="fragment current-only" data-code-focus="3">TFJob is a Kubernetes custom resource
+                definition that
                 makes it
                 easy to run TensorFlow training jobs on Kubernetes.
             </p>
-            <p class="fragment current-only" data-code-focus="8-9">The Master is responsible for orchestrating training
+            <p class="fragment current-only" data-code-focus="8-9">The Master is responsible for orchestrating
+                training
                 and performing tasks like checkpointing the model.</p>
             <p class="fragment current-only" data-code-focus="13-15">Kubernetes Training Container Spec</p>
             <p class="fragment current-only" data-code-focus="21-27">Kubernetes Persistent Volume Mounts</p>
-            <p class="fragment current-only" data-code-focus="28-29">The Worker do the actual work of training the
-                model. In some cases, worker 0 might also act as the chief.</p>
-            <p class="fragment current-only" data-code-focus="48-49">The PS are parameter servers; these servers provide
+            <p class="fragment current-only" data-code-focus="28-29">The Worker do the actual work of training
+                the
+                model. In some cases, worker 0 might also act as the Master.</p>
+            <p class="fragment current-only" data-code-focus="48-49">The PS are parameter servers; these servers
+                provide
                 a distributed data store for the model parameters.</p>
 
         </section>
