@@ -116,7 +116,6 @@
             features for managing configurations across different clusters and environments.
         </section>
         <section>
-            <h4>TFJob</h4>
             <pre>
                 <code data-trim>
                 ---
@@ -211,16 +210,16 @@
         <section>
             <section data-markdown>
                 <script type="text/template">
-                    ## Seldon Core
+                    ### Seldon Core
                     Instead of just serving up single models behind an API endpoint, Seldon Core allows complex runtime inference graphs to be deployed in containers as microservices.
                 </script>
             </section>
 
             <section data-markdown>
                 <script type="text/template">
-                    ## These graphs can be composed of:
+                    ### These graphs can be composed of:
                     1. **Models** — runtime inference executable for one or more machine learning models.
-                    2. **Routers** — route API requests to sub-graphs. E.g. to serve experiments such as AB Tests or more dynamic Multi-Armed Bandits.
+                    2. **Routers** — route API requests to sub-graphs. E.g. to serve experiments such as A/B Tests or more dynamic Multi-Armed Bandits (MAB).
                     3. **Combiners** — combine the responses from sub-graphs. E.g. ensembles of models.
                     4. **Transformers** — transform request or responses. E.g. transform feature requests.
                 </script>
