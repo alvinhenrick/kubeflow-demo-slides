@@ -197,15 +197,12 @@
             <p class="fragment current-only" data-code-focus="8-9">The Master is responsible for orchestrating
                 training
                 and performing tasks like checkpointing the model.</p>
-            <p class="fragment current-only" data-code-focus="13-15">Kubernetes Training Container Spec</p>
-            <p class="fragment current-only" data-code-focus="21-27">Kubernetes Persistent Volume Mounts</p>
+            <p class="fragment current-only" data-code-focus="13-15">Kubernetes training container specification</p>
+            <p class="fragment current-only" data-code-focus="21-27">Kubernetes Persistent volume mounts</p>
             <p class="fragment current-only" data-code-focus="28-29">The Worker do the actual work of training
-                the
-                model. In some cases, worker 0 might also act as the Master.</p>
+                the model. In some cases, worker 0 might also act as the Master.</p>
             <p class="fragment current-only" data-code-focus="48-49">The PS are parameter servers; these servers
-                provide
-                a distributed data store for the model parameters.</p>
-
+                provide a distributed data store for the model parameters.</p>
         </section>
         <section>
             <section data-markdown>
@@ -259,7 +256,7 @@
                                   "containers": [
                                     {
                                       "image": "your-docker-image",
-                                      "imagePullPolicy": "IfNotPresent",
+                                      "imagePullPolicy": "IfNotPresent or Always etc",
                                       "name": "your-model-name",
                                       "resources": {
                                         "requests": {
@@ -276,12 +273,12 @@
                               "children": [],
                               "name": "your-model-name",
                               "endpoint": {
-                                "type": "your-endpoint-type"
+                                "type": "your-endpoint-type #REST or #GRPC"
                               },
                               "type": "MODEL"
                             },
                             "name": "your-model-name",
-                            "replicas": "",
+                            "replicas": "# Number of replica",
                             "annotations": {
                               "predictor_version": "your-model-version"
                             }
@@ -295,7 +292,7 @@
                     SeldonDeployment is a Kubernetes custom resource
                     definition that makes it easy to server models on Kubernetes.
                 </p>
-                <p class="fragment current-only" data-code-focus="23-33">Seldon Serving Container Spec</p>
+                <p class="fragment current-only" data-code-focus="23-33">Seldon serving container specification</p>
                 <p class="fragment current-only" data-code-focus="39-52">The deployment graph definition</p>
             </section>
         </section>
