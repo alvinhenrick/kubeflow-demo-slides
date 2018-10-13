@@ -124,62 +124,62 @@
             <section>
                 <pre>
                     <code data-trim>
-                        VERSION=1.1
-                        TRAIN_IMAGE_BASE=alvinhenrick/kube-demo-simple
-                        SERVE_IMAGE_BASE=alvinhenrick/iris-classification
+                    VERSION=1.1
+                    TRAIN_IMAGE_BASE=alvinhenrick/kube-demo-simple
+                    SERVE_IMAGE_BASE=alvinhenrick/iris-classification
 
-                        build:
-                            docker build -t ${TRAIN_IMAGE_BASE}:${VERSION} .
+                    build:
+                        docker build -t ${TRAIN_IMAGE_BASE}:${VERSION} .
 
-                        login:
-                            docker login
+                    login:
+                        docker login
 
-                        push:
-                            docker push ${TRAIN_IMAGE_BASE}:${VERSION}
+                    push:
+                        docker push ${TRAIN_IMAGE_BASE}:${VERSION}
 
-                        createpvc:
-                            kubectl apply -f mystorage.yaml
+                    createpvc:
+                        kubectl apply -f mystorage.yaml
 
-                        deletepvc:
-                            kubectl delete -f mystorage.yaml
+                    deletepvc:
+                        kubectl delete -f mystorage.yaml
 
-                        copydata:
-                            kubectl cp ./iris dataaccess:/data/
+                    copydata:
+                        kubectl cp ./iris dataaccess:/data/
 
-                        train:
-                            kubectl apply -f tfjobsimple.yaml
+                    train:
+                        kubectl apply -f tfjobsimple.yaml
 
-                        download:
-                            kubectl cp dataaccess:/model/iris_model ./iris_model
+                    download:
+                        kubectl cp dataaccess:/model/iris_model ./iris_model
 
-                        s2i:
-                            s2i build . seldonio/seldon-core-s2i-python3:0.1 ${SERVE_IMAGE_BASE}:${VERSION} --copy ./iris_model --env MODEL_NAME=IrisClassifier --env API_TYPE=REST --env SERVICE_TYPE=MODEL --env PERSISTENCE=0
+                    s2i:
+                        s2i build . seldonio/seldon-core-s2i-python3:0.1 ${SERVE_IMAGE_BASE}:${VERSION} --copy ./iris_model --env MODEL_NAME=IrisClassifier --env API_TYPE=REST --env SERVICE_TYPE=MODEL --env PERSISTENCE=0
 
-                        s2ipush:
-                            docker push ${SERVE_IMAGE_BASE}:${VERSION}
+                    s2ipush:
+                        docker push ${SERVE_IMAGE_BASE}:${VERSION}
 
-                        serve:
-                            cd simple_demo_ks ; ks generate seldon-serve-simple iris-classification --image=${SERVE_IMAGE_BASE}:${VERSION}
-                            cd simple_demo_ks ; ks apply default -c iris-classification
+                    serve:
+                        cd simple_demo_ks ; ks generate seldon-serve-simple iris-classification --image=${SERVE_IMAGE_BASE}:${VERSION}
+                        cd simple_demo_ks ; ks apply default -c iris-classification
 
-                        portforward:
-                            kubectl port-forward `kubectl get pods -n default -l service=ambassador -o jsonpath='{.items[0].metadata.name}'` -n default 8080:80
+                    portforward:
+                        kubectl port-forward `kubectl get pods -n default -l service=ambassador -o jsonpath='{.items[0].metadata.name}'` -n default 8080:80
 
-                        predict:
-                            curl -X POST -H 'Content-Type: application/json' -d '{"data":{"ndarray":[[5.9, 3.0, 4.2, 1.5],[6.9, 3.1, 5.4, 2.1],[5.1, 3.3, 1.7, 0.5]]}}' http://localhost:8080/seldon/iris-classification/api/v0.1/predictions
+                    predict:
+                        curl -X POST -H 'Content-Type: application/json' -d '{"data":{"ndarray":[[5.9, 3.0, 4.2, 1.5],[6.9, 3.1, 5.4, 2.1],[5.1, 3.3, 1.7, 0.5]]}}' http://localhost:8080/seldon/iris-classification/api/v0.1/predictions
 
-                        tail:
-                            kubectl logs -f kube-demo-simple-master-0
+                    tail:
+                        kubectl logs -f kube-demo-simple-master-0
 
-                        tailseldon:
-                            kubectl logs -f `kubectl get pods -l seldon-app=iris-classification -o=jsonpath='{.items[0].metadata.name}'` iris-classification
+                    tailseldon:
+                        kubectl logs -f `kubectl get pods -l seldon-app=iris-classification -o=jsonpath='{.items[0].metadata.name}'` iris-classification
 
-                        stop:
-                            kubectl delete -f tfjobsimple.yaml
+                    stop:
+                        kubectl delete -f tfjobsimple.yaml
 
-                        clean:
-                            cd simple_demo_ks ; ks delete default -c iris-classification
-                            cd simple_demo_ks ; ks component rm iris-classification
+                    clean:
+                        cd simple_demo_ks ; ks delete default -c iris-classification
+                        cd simple_demo_ks ; ks component rm iris-classification
                     </code>
                 </pre>
                 <p class="fragment current-only" data-code-focus="1-3">Declare the variable , tag and version for
