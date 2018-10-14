@@ -42,7 +42,7 @@
             width: max-content;
         }
 
-       
+
     </style>
 </head>
 <body>
@@ -372,13 +372,15 @@
                 callback: function () {
                     RevealCodeFocus();
                 }
-            }
+            },
             // {
             //     src: 'plugin/highlight/highlight.js', async: true, callback: function () {
             //         hljs.initHighlightingOnLoad();
             //     }
             // }
-        ]
+        ],
+        transition: 'convex',
+        backgroundTransition: 'zoom'
     });
 </script>
 </body>
