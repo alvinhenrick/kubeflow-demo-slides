@@ -122,8 +122,8 @@
                 <a href="#" class="navigate-down">Discuss Makefile</a>
             </section>
             <section>
-                <pre>
-                    <code data-trim>
+                <h3>Makefile</h3>
+                <pre><code data-trim>
                     VERSION=1.1
                     TRAIN_IMAGE_BASE=alvinhenrick/kube-demo-simple
                     SERVE_IMAGE_BASE=alvinhenrick/iris-classification
@@ -181,16 +181,16 @@
                         cd simple_demo_ks ; ks delete default -c iris-classification
                         cd simple_demo_ks ; ks component rm iris-classification
                         # ksonnet delete and remove component
-                    </code>
-                </pre>
-                <p class="fragment current-only" data-code-focus="1-3">Declare the variable , tag and version for
+                    </code></pre>
+                <p class="fragment current-only" data-code-focus="1-3">Declare the variable,tag and version for
                     training and serving docker image.</p>
                 <p class="fragment current-only" data-code-focus="5-6">Docker build training image.</p>
                 <p class="fragment current-only" data-code-focus="8-9">Login to your docker hub account.</p>
                 <p class="fragment current-only" data-code-focus="11-12">Push the training docker image to docker
                     hub.</p>
-                <p class="fragment current-only" data-code-focus="14-18">Create/Delete Persistence volume.</p>
-                <p class="fragment current-only" data-code-focus="20-21">Copy training data in Persistence volume.</p>
+                <p class="fragment current-only" data-code-focus="14-18">Create/Delete Persistence volume container.</p>
+                <p class="fragment current-only" data-code-focus="20-21">Copy training data into Persistence volume
+                    container.</p>
                 <p class="fragment current-only" data-code-focus="23-24">Run the training job with Kubeflow.</p>
                 <p class="fragment current-only" data-code-focus="26-27">Download the trained model.</p>
                 <p class="fragment current-only" data-code-focus="29-30">Build model serving docker image with S2i.</p>
@@ -210,8 +210,8 @@
             </section>
         </section>
         <section>
-            <pre>
-                <code data-trim>
+            <h3>TFJob</h3>
+            <pre><code data-trim>
                 ---
                 apiVersion: "kubeflow.org/v1alpha2"
                 kind: TFJob
@@ -281,17 +281,13 @@
                           - name: models
                             persistentVolumeClaim:
                               claimName: mymodels
-                </code>
-            </pre>
+                </code></pre>
             <p class="fragment current-only" data-code-focus="3">TFJob is a Kubernetes custom resource
-                definition that
-                makes it
-                easy to run TensorFlow training jobs on Kubernetes.
-            </p>
+                definition that makes it easy to run TensorFlow training jobs.</p>
             <p class="fragment current-only" data-code-focus="8-9">The Master is responsible for orchestrating
-                training
-                and performing tasks like checkpointing the model.</p>
-            <p class="fragment current-only" data-code-focus="13-15">Kubernetes training container specification</p>
+                training and performing tasks like checkpointing the model.</p>
+            <p class="fragment current-only" data-code-focus="13-15">Kubernetes training container
+                specification</p>
             <p class="fragment current-only" data-code-focus="21-27">Kubernetes Persistent volume mounts</p>
             <p class="fragment current-only" data-code-focus="28-29">The Worker do the actual work of training
                 the model. In some cases, worker 0 might also act as the Master.</p>
@@ -323,8 +319,8 @@
                    target="_b">Advance Graphs</a>
             </section>
             <section>
-            <pre>
-                <code data-trim>
+                <h3>SeldonDeployment</h3>
+                <pre><code data-trim>
                     {
                       "apiVersion": "machinelearning.seldon.io/v1alpha2",
                       "kind": "SeldonDeployment",
@@ -380,8 +376,7 @@
                         ]
                       }
                     }
-                </code>
-            </pre>
+                </code></pre>
                 <p class="fragment current-only" data-code-focus="3">
                     SeldonDeployment is a Kubernetes custom resource
                     definition that makes it easy to server models on Kubernetes.
