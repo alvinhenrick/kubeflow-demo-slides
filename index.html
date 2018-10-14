@@ -123,7 +123,7 @@
             </section>
             <section>
                 <h3>Makefile</h3>
-                <pre><code data-trim>
+                <pre><code class="makefile" data-trim>
                     VERSION=1.1
                     TRAIN_IMAGE_BASE=alvinhenrick/kube-demo-simple
                     SERVE_IMAGE_BASE=alvinhenrick/iris-classification
@@ -211,7 +211,7 @@
         </section>
         <section>
             <h3>TFJob</h3>
-            <pre><code data-trim>
+            <pre><code class="yaml" data-trim>
                 ---
                 apiVersion: "kubeflow.org/v1alpha2"
                 kind: TFJob
@@ -320,7 +320,7 @@
             </section>
             <section>
                 <h3>Seldon Deployment</h3>
-                <pre><code data-trim>
+                <pre><code class="json" data-trim>
                     {
                       "apiVersion": "machinelearning.seldon.io/v1alpha2",
                       "kind": "SeldonDeployment",
