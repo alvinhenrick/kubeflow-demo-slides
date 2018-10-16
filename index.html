@@ -48,7 +48,7 @@
 <body>
 <div class="reveal">
     <div class="slides">
-        <section>
+        <section data-transition="concave">
             <h1><img src="images/Kubeflow_Logo.png" width="200" height="202"></h1>
             The Kubeflow project is dedicated to making deployments of machine learning (ML) workflows on Kubernetes
             simple, portable and scalable.
@@ -61,7 +61,7 @@
             monitor, and update services for end users.
             Ambassador can also be used to handle the functions of a Kubernetes ingress controller and load balancer.
         </section>
-        <section>
+        <section data-transition="concave">
             <h1><img src="images/Seldon_Logo.jpg" width="400" height="100"></h1>
             Seldon a serving container to export trained models to Kubernetes.
             Kubeflow integrates with Seldon Core, the open source platform for deploying machine learning models on
@@ -73,11 +73,14 @@
             Built on the JSON templating language Jsonnet, Ksonnet provides an organizational structure and specialized
             features for managing configurations across different clusters and environments.
         </section>
-        <section>
+        <section data-transition="concave">
             <section>
                 <h1>DEMO 1</h1>
                 <p>Simple Iris Classification</p>
-                <a href="#" class="navigate-down">Discuss Makefile</a>
+                <a href="#" class="navigate-down">
+                    <img width="128" height="178" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png"
+                         alt="Down Arrow">
+                </a>
             </section>
             <section>
                 <h3>Makefile</h3>
@@ -252,12 +255,16 @@
             <p class="fragment current-only" data-code-focus="48-49">The PS are parameter servers; these servers
                 provide a distributed data store for the model parameters.</p>
         </section>
-        <section>
-            <section data-markdown>
-                <script type="text/template">
-                    ### Seldon Core
-                    Instead of just serving up single models behind an API endpoint, Seldon Core allows complex runtime inference graphs to be deployed in containers as microservices.
-                </script>
+        <section data-transition="concave">
+            <section>
+                <h3>Seldon Core</h3>
+                Instead of just serving up single models behind an API endpoint, Seldon Core allows complex runtime
+                inference graphs to be deployed in containers as microservices.
+                <br/>
+                <a href="#" class="navigate-down">
+                    <img width="128" height="178" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png"
+                         alt="Down Arrow">
+                </a>
             </section>
             <section data-markdown>
                 <script type="text/template">
@@ -271,7 +278,7 @@
             <section>
                 <h3>The example graphs</h3>
                 <img src="images/SeldonGraphs.png">
-                </br>
+                <br/>
                 <a href="https://github.com/cliveseldon/seldon-core/blob/master/notebooks/advanced_graphs.ipynb"
                    target="_b">Advance Graphs</a>
             </section>
@@ -345,7 +352,7 @@
             <h1>DEMO 2</h1>
             <p>Simple IMDB Document Classification</p>
         </section>
-        <section>
+        <section data-transition="concave">
             <p>Thank you!!!!</p>
         </section>
     </div>
