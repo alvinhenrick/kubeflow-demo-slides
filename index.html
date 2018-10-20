@@ -48,30 +48,87 @@
 <body>
 <div class="reveal">
     <div class="slides">
+        <section>
+            <h1>
+                <small>Training and Deploying TensorFlow Models at scale on Kubernetes with Kubeflow</small>
+            </h1>
+            <h3>
+                <Small><a href="https://www.linkedin.com/in/alvinhenrick/"> Alvin Henrick </a></Small>
+            </h3>
+            <small>Principle Engineer</small>
+            <br>
+            <small>Change HealthCare</small>
+            <hr>
+
+        </section>
         <section data-transition="concave">
-            <h1><img src="images/Kubeflow_Logo.png" width="200" height="202"></h1>
-            The Kubeflow project is dedicated to making deployments of machine learning (ML) workflows on Kubernetes
-            simple, portable and scalable.
-            Anywhere you are running Kubernetes, you should be able to run Kubeflow.
+            <h3>Architecture & Technologies</h3>
+            <img src="images/architecture.png">
+            <small><a href="https://kubernetes.io/"> Kubernates</a> - <a
+                    href="https://www.tensorflow.org/">Tensorflow</a>
+                - <a href="https://jsonnet.org/">jsonnet</a>
+                - <a href="https://ksonnet.io/">ksonnet</a>
+                - <a href="https://www.kubeflow.org/">kubeflow</a>
+                - <a href="https://www.docker.com/">docker</a>
+                - <a href="https://www.seldon.io/">Seldon</a>
+                - <a href="https://github.com/openshift/source-to-image">s2i</a></small>
+
         </section>
         <section>
-            <h1><img src="images/Ambassador_Logo.png" width="321" height="80"></h1>
-            Ambassador is an open source, Kubernetes-native microservices API gateway built on the Envoy Proxy.
-            Ambassador is built from the ground up to support multiple, independent teams that need to rapidly publish,
-            monitor, and update services for end users.
-            Ambassador can also be used to handle the functions of a Kubernetes ingress controller and load balancer.
+            <img src="images/Kubeflow_Logo.png">
+            <h4>Kubeflow project </h4>
+            <ul>
+                <li>Is dedicated to making deployments of machine learning (ML) workflows on <a
+                        href="https://kubernetes.io/">Kubernetes</a></li>
+                <li>Simple, portable and scalable</li>
+                <li>Anywhere you are running Kubernetes, you should be able to run Kubeflow.</li>
+            </ul>
         </section>
         <section data-transition="concave">
+            <h2>Ambassador</h2>
+            <ul>
+                <li><a href="https://github.com/datawire/ambassador"> Ambassador </a> is an open source,
+                    Kubernetes-native microservices <a href="https://www.getambassador.io">API gateway </a> built on the
+                    Envoy Proxy.
+                </li>
+                <li>Ambassador is built from the ground up to support multiple, independent teams that need to rapidly
+                    publish,
+                    monitor, and update services for end users.
+                </li>
+                <li>Ambassador can also be used to handle the functions of a Kubernetes <a
+                        href="https://kubernetes.io/docs/concepts/services-networking/ingress/">ingress controller</a>
+                    and load balancer.
+                </li>
+            </ul>
+        </section>
+        <section>
             <h1><img src="images/Seldon_Logo.jpg" width="400" height="100"></h1>
-            Seldon a serving container to export trained models to Kubernetes.
-            Kubeflow integrates with Seldon Core, the open source platform for deploying machine learning models on
-            Kubernetes.
+            <ul>
+                <li><a href="https://www.seldon.io">Seldon</a> a serving container to export trained models to
+                    Kubernetes.
+                </li>
+                <li>Kubeflow integrates with <a href="https://github.com/SeldonIO/seldon-core">Seldon Core</a>, the open
+                    source platform for deploying machine learning models on
+                    Kubernetes.
+                </li>
+            </ul>
+        </section>
+        <section data-transition="concave">
+            <h1><img src="images/Ksonnet_Logo.png" width="200" height="202"></h1>
+            <h4>Ksonnet</h4>
+            <ul>
+                <li><a href="https://ksonnet.io">Ksonnet</a> is packaging framework for extensible Kubernetes
+                    configurations.
+                </li>
+                <li>On the JSON templating language <a href="https://jsonnet.org">Jsonnet</a>, Ksonnet provides an
+                    organizational structure and specialized
+                    features for managing configurations across different clusters and environments.
+                </li>
+            </ul>
         </section>
         <section>
-            <h1><img src="images/Ksonnet_Logo.png" width="200" height="202"></h1>
-            Packaging framework for extensible Kubernetes configurations.
-            Built on the JSON templating language Jsonnet, Ksonnet provides an organizational structure and specialized
-            features for managing configurations across different clusters and environments.
+            <h3>Deployment Steps</h3>
+            <img src="images/projectflow.png" width="500" height="350">
         </section>
         <section data-transition="concave">
             <section>
@@ -171,6 +228,11 @@
             </section>
         </section>
         <section>
+            <h3>TF Cluster</h3>
+            <img src="images/TF_Cluster.png" width="500" height="400">
+            <br/>
+        </section>
+        <section data-transition="concave">
             <h3>TFJob</h3>
             <pre><code class="yaml" data-trim>
                 ---
@@ -258,9 +320,12 @@
         <section data-transition="concave">
             <section>
                 <h3>Seldon Core</h3>
-                Instead of just serving up single models behind an API endpoint, Seldon Core allows complex runtime
+                Instead of just serving up single models behind an API endpoint, <a>Seldon Core</a> allows complex
+                runtime
                 inference graphs to be deployed in containers as microservices.
                 <br/>
+                <img src="images/Seldon_core.png" width="400" height="200">
+
                 <a href="#" class="navigate-down">
                     <img width="128" height="178" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png"
                          alt="Down Arrow">
@@ -269,15 +334,15 @@
             <section data-markdown>
                 <script type="text/template">
                     ### These graphs can be composed of:
-                    1. **Models** — runtime inference executable for one or more machine learning models.
-                    2. **Routers** — route API requests to sub-graphs. E.g. to serve experiments such as A/B Tests or more dynamic Multi-Armed Bandits (MAB).
-                    3. **Combiners** — combine the responses from sub-graphs. E.g. ensembles of models.
-                    4. **Transformers** — transform request or responses. E.g. transform feature requests.
+                    1. <a>**Models**</a> — runtime inference executable for one or more machine learning models.
+                    2. <a>**Routers**</a>— route API requests to sub-graphs. E.g. to serve experiments such as A/B Tests or more dynamic Multi-Armed Bandits (MAB).
+                    3. <a>**Combiners**</a> — combine the responses from sub-graphs. E.g. ensembles of models.
+                    4. <a>**Transformers**</a> — transform request or responses. E.g. transform feature requests.
                 </script>
             </section>
             <section>
                 <h3>The example graphs</h3>
-                <img src="images/SeldonGraphs.png">
+                <img src="images/SeldonGraphs.png" width="600" height="400">
                 <br/>
                 <a href="https://github.com/cliveseldon/seldon-core/blob/master/notebooks/advanced_graphs.ipynb"
                    target="_b">Advance Graphs</a>
